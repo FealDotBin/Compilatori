@@ -1,0 +1,15 @@
+package main.syntaxtree.node.expr.unaryexpr;
+
+import main.Visitor.Visitor;
+import main.syntaxtree.node.expr.Expr;
+
+public class UminusOp extends UnaryExpr {
+
+    public UminusOp(Expr expr) {
+        super(expr);
+    }
+
+    public Object accept(Visitor visitor){
+        return visitor.visit(this);
+    }
+}
