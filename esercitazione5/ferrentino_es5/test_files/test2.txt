@@ -1,0 +1,124 @@
+start:
+def mainFunction() : void {
+    integer flag << 1;
+    integer option << 0;
+
+    while (flag = 1) loop {
+        ("Scegli l'operazione da eseguire:") -->!;
+        ("1. Somma di due numeri") -->!;
+        ("2. Moltiplicazione di due numeri utilizzando la somma") -->!;
+        ("3. Divisione intera fra due numeri positivi") -->!;
+        ("4. Elevamento a potenza") -->!;
+        ("5. Successione di Fibonacci") -->!;
+        option <-- "Input: ";
+        while (option < 1 or option > 5) loop {
+            option <-- "Seleziona una delle operazioni presenti nella lista: ";
+        }
+
+        || somma
+        if(option = 1) then {
+            float a, b;
+
+            a <-- "Inserisci il primo numero: ";
+            b <-- "Inserisci il secondo numero: ";
+
+            ("Result: ", a + b) -->!;
+        }
+
+        || moltiplicazione
+        if(option = 2) then {
+            || Attenzione: l'algoritmo non restituisce il valore corretto quando entrambi gli input sono non-interi
+            float a, b;
+            float acc << 0.0;
+
+            a <-- "Inserisci il primo numero: ";
+            b <-- "Inserisci il secondo numero: ";
+
+            || se a è intero, swap a e b, dato che uso b come iteratore e deve essere intero
+            if(isInteger(a)) then {
+                swap(a,b);
+            }
+
+            || se b è negativo, sposto il segno su a, dato che uso b come iteratore
+            if(b < 0) then {
+                a << -a;
+                b << -b;
+            }
+
+            while(b > 0) loop {
+                acc << acc + a;
+                b << b - 1;
+            }
+
+            ("Result: ", acc) -->!;
+        }
+
+        || divisione
+        if(option = 3) then {
+            integer a, b;
+
+            a <-- "Inserisci il primo intero (positivo): ";
+            while(a < 0) loop {
+                ("Gli interi devono essere POSITIVI") -->!;
+                a <-- "Inserisci il primo intero (positivo): ";
+            }
+
+            b <-- "Inserisci il secondo intero (positivo): ";
+            while(b < 0) loop {
+                ("Gli interi devono essere POSITIVI") -->!;
+                a <-- "Inserisci il primo intero (positivo): ";
+            }
+
+            ("Result: ", a / b) -->!;
+        }
+
+        || potenza
+        if(option = 4) then {
+            float a, b;
+
+            a <-- "Inserisci il primo numero: ";
+            b <-- "Inserisci il secondo numero: ";
+
+            ("Result: ", a ^ b) -->!;
+        }
+
+        || fibonacci
+        if(option = 5) then {
+            integer n;
+
+            n <-- "Inserisci un numero: ";
+
+            ("Result: ", Fibonacci(n)) -->!;
+        }
+
+        flag <-- "Vuoi continuare? si (1) no (0) ";
+        while (flag != 0 and flag != 1) loop {
+            flag <-- "Valore non accettato! Inserire 1 per continuare o 0 per terminare: ";
+        }
+    }
+}
+
+def isInteger(float a) : boolean {
+    a << a * a; || rendo a positivo
+    while (a >= 1) loop {
+        a << a - 1;
+    }
+    return a = 0;
+}
+
+def swap(out float a, b) : void {
+    float tmp << a;
+    a << b;
+    b << tmp;
+}
+
+def Fibonacci(integer n) : integer {
+    if(n < 1) then {
+        return 0;
+    }
+    if(n = 1) then {
+        return 1;
+    }
+
+    return Fibonacci(n-1) + Fibonacci(n-2);
+}

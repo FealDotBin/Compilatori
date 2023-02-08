@@ -1,0 +1,62 @@
+|*
+ * Nel seguente programma di test viene testato:
+ * L'utilizzo di statement for
+ * L'utilizzo di statement if-else
+ * Combinazioni di statement for, while ed if-else
+ *
+ * Combinazioni di while ed if vengono già ampiamente testate in test2.txt
+ *|
+
+start:
+def mainFun() : void {
+    integer a << 10;
+    boolean flag;
+
+    ("[i] Stampo i numeri da 1 a 10 e scrivo se sono pari o dispari") -->!;
+    flag << false;
+    for i << 1 to 10 loop {
+        (i, " ") -->;
+        if flag and true then {
+            ("Pari") -->!;
+        } else {
+            ("Dispari") -->!;
+        }
+        flag << not flag;
+    }
+
+    ("[i] Stampo i numeri da 10 a 1 e scrivo se sono pari o dispari") -->!;
+    flag << true;
+    for i << 10 to 1 loop {
+        (i, " ") -->;
+        if flag or false then {
+            ("Pari") -->!;
+        } else {
+            ("Dispari") -->!;
+        }
+        flag << not flag;
+    }
+
+    ("[i] Stampo da 1 a 10 per 2 volte utilizzando un doppio for. Inoltre si stampa fizz-buzz in modo alternato") -->!;
+    flag << true;
+    for i << 2 to 1 loop {
+        for j << 1 to 10 loop {
+            (j) -->;
+            if flag then {
+                ("Fizz") -->!;
+            } else {
+                ("Buzz") -->!;
+            }
+            flag << not flag;
+        }
+    }
+
+    ("[i] Stampo da 1 a 10 per 2 volte ma utilizzando for e while") -->!;
+    for i << 2 to 1 loop {
+        integer j << 1;
+
+        while j <= 10 loop {
+            (j) -->!;
+            j << j + 1;
+        }
+    }
+}

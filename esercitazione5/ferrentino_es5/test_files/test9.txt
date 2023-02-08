@@ -1,0 +1,37 @@
+|*
+ * Nel seguente programma di test viene testato:
+ * Diverse concatenazioni tra stringhe ed altri tipi
+ * Diverse espressioni relop tra string e string
+ * Diverse espressioni relop tra char e char
+ *|
+
+start:
+def mainFun() : void {
+    string s << "Hello" & "World";
+    integer intero << 0;
+    float reale << 0.1;
+    char carattere << 'a';
+    boolean booleano << true;
+
+    ("[i] TESTO LE CONCATENAZIONI TRA STRING ED ALTRI TIPI") -->!;
+    ("[i] integer & string & integer: " & intero & s & 0) -->!;
+    ("[i] float & string & real: " & reale & s & 0.1) -->!;
+    ("[i] char & string & char: " & carattere & s & 'a') -->!;
+    ("[i] boolean & string & boolean: " & booleano & s & true) -->!;
+
+    ("\n[i] TESTO RELOP EXPR TRA STRING E STRING") -->!;
+    ("[i] \"Hello\" = \"Hello\": ", "Hello" = "Hello") -->!;
+    ("[i] \"Hello\" != \"Hello\": ", "Hello" != "Hello") -->!;
+    ("[i] \"helloo\" > \"Hello\": ", "helloo" > "Hello") -->!;
+    ("[i] \"helloo\" >= \"Hello\": ", "helloo" >= "Hello") -->!;
+    ("[i] \"helloo\" < \"Hello\": ", "helloo" < "Hello") -->!;
+    ("[i] \"helloo\" <= \"Hello\": ", "helloo" <= "Hello") -->!;
+
+    ("\n[i] TESTO RELOP EXPR TRA CHAR E CHAR") -->!;
+    ("[i] 'H' = 'H': ", 'H' = 'H') -->!;
+    ("[i] 'H' != 'H': ", 'H' != 'H') -->!;
+    ("[i] 'h' > 'H': ", 'h' > 'H') -->!;
+    ("[i] 'h' >= 'H': ", 'h' >= 'H') -->!;
+    ("[i] 'h' < 'H': ", 'h' < 'H') -->!;
+    ("[i] 'h' <= 'H': ", 'h' <= 'H') -->!;
+}

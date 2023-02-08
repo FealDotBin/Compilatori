@@ -1,0 +1,105 @@
+|*
+ * Nel seguente programma di test viene testato:
+ * L'effetto della dichiarazione di una variabile con lo stesso nome di una funzione (non supportata da C purtroppo)
+ * L'utilizzo, la modifica e la lettura di variabili di tipo var
+ * Il passaggio del risultato di una funzione come parametro
+ * La lettura di più variabili in un solo statement
+ * Viene mostrato lo shadowing
+ * L'utilizzo di variabili globali
+ * L'effetto dell'utilizzo di una variabile prima della sua dichiarazione
+ * La stampa del risultato dell'espressione "-1--1"
+ * La stampa delle escape sequence "\n\t\r\"\\"
+ * Chiamata ad una funzione con ritorno (retIntFun) come statement
+ * L'effetto dell'utilizzo di diversi return statement all'interno di funzioni void e non-void
+ *|
+
+string HEY << "HEY";
+
+start:
+def mainFunction() : void {
+    var intero << 3, reale << 3.3, stringa << "hello", booleano << true, carattere << 'a';
+    ||integer printVar; || notiamo che la variabile non fa shadowing sulla funzione printVar
+
+    || stampo le variabili
+    || inoltre passo una funzione con ritorno ad un'altra funzione
+    printVar(retIntFun(intero), reale, stringa, booleano, carattere);
+
+    || modifico le variabili
+    modifyVar(intero, reale, stringa, booleano, carattere);
+    printVar(intero, reale, stringa, booleano, carattere);
+
+    || assegno alle variabili dei valori dati dall'utente
+    intero, reale, stringa, booleano, carattere <-- "Inserisci (sottomettendo con INVIO ogni scelta) i valori per integer, real, string, boolean, char: \n";
+    printVar(intero, reale, stringa, booleano, carattere);
+
+    || mostro lo shadowing
+    if true then {
+        integer intero << 9999;
+        ("[i] La variabile \"intero\" fa shadowing", "\n", intero) -->!;
+    }
+    ("[i] Stampo \"intero\" fuori dal blocco if-then", "\n", intero) -->!;
+
+    || stampo le variabile globali
+    ("[i] Stampo la variabile globale \"HEY\" ", "\n", HEY) -->!;
+    ("[i] Stampo la variabile globale \"VOTO_COMPILATORI\" ", "\n", VOTO_COMPILATORI) -->!;
+
+    || uso una variabile prima della dichiarazione
+    useVarBeforeDecl();
+
+    || stampo il risultato dell'espressione -1--1
+    ("[i] Stampo -1--1 = ", -1--1) -->!;
+
+    || stampo le escape sequence
+    ("[i] Stampo le escape sequence") -->!;
+    ("\n\t\r\"\\") -->!;
+
+    || una funzione con ritorno può essere usata come statement
+    retIntFun(intero);
+
+    || questo statement serve a testare il comportamento delle funzioni void rispetto ai return statement
+    || "return;" ok
+    || "return <qualcosa>" errore
+    || Se rimuovo "return;" ok
+    return;
+}
+
+def printVar(integer intero | float reale | string stringa | boolean booleano | char carattere) : void {
+    ("[i] Stampa delle variabili") -->!;
+    (intero) -->!;
+    (reale) -->!;
+    (stringa) -->!;
+    (booleano) -->!;
+    (carattere) -->!;
+}
+
+def modifyVar(out integer intero | out float reale | out string stringa | out boolean booleano | out char carattere) : void {
+    ("[i] Modifica delle variabili") -->!;
+    intero << intero + 1;
+    reale << reale + 1;
+    stringa << stringa & "hello";
+    booleano << not booleano;
+    carattere << 'b';
+}
+
+def useVarBeforeDecl() : void {
+    integer a << b;
+    integer b << 2;
+
+    ("[i] Stampo \"a\", dichiarata prima di \"b\"", "\n", a) -->!;
+    ("[i] Stampo \"b\", dichiarata dopo \"a\"", "\n", b) -->!;
+}
+
+integer VOTO_COMPILATORI << 18;
+
+|*
+ * Questa funzione riceve un intero e restituisce lo stesso intero, serve solo a mostrare che puoi
+ * passare una funzione come parametro.
+ * Inoltre togliendo "return a;", vediamo che l'analizzatore semantico dà errore.
+ * Inoltre scrivendo "return;", vediamo che l'analizzatore semantico dà errore.
+ * Inoltre scrivendo "return true", vediamo che l'analizzatore semantico dà errore.
+ *|
+def retIntFun(out integer a) : integer {
+    a << a;
+    return a;
+}
+

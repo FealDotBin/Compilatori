@@ -1,0 +1,80 @@
+|*
+ * Nel seguente programma di test viene testato:
+ * L'utilizzo di funzioni che ricevono una variabile string non-out e la passano come non-out
+ * L'utilizzo di funzioni che ricevono una variabile string out e la passano come out
+ * L'utilizzo di funzioni che ricevono una variabile string non-out e la passano come out
+ * L'utilizzo di funzioni che ricevono una variabile string out e la passano come non-out
+ *|
+
+start:
+def mainFun() : void {
+    string a;
+    string b;
+
+    ("[i] Passo a per valore e b per riferimento. Fun1 passerà a per valore e b per riferimento.") -->!;
+    a << "a";
+    b << "b";
+    ("[i] mainFun: Stampo i valori di a e b prima della chiamata a fun1") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+    fun1(a, b);
+    ("[i] mainFun: Stampo i valori di a e b dopo la chiamata a fun1") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+    ("==============================================================================================") -->!;
+
+    ("[i] Passo a per valore e b per riferimento. Fun11 passerà a per riferimento e b per valore.") -->!;
+    a << "a";
+    b << "b";
+    ("[i] mainFun: Stampo i valori di a e b prima della chiamata a fun11") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+    fun11(a, b);
+    ("[i] mainFun: Stampo i valori di a e b dopo la chiamata a fun11") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+}
+
+def fun1(string a | out string b) : void {
+    a << a & "a";
+    b << b & "b";
+
+    ("[i] fun1: Stampo i valori di a e b prima della chiamata a fun2") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+    fun2(a, b);
+    ("[i] fun1: Stampo i valori di a e b dopo la chiamata a fun2") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+}
+
+def fun2(string a | out string b) : void {
+    a << a & "a";
+    b << b & "b";
+
+    ("[i] fun2: Stampo i valori di a e b") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+}
+
+def fun11(string a | out string b) : void {
+    a << a & "a";
+    b << b & "b";
+
+    ("[i] fun11: Stampo i valori di a e b prima della chiamata a fun22") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+    fun22(a, b);
+    ("[i] fun11: Stampo i valori di a e b dopo la chiamata a fun22") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+}
+
+def fun22(out string a | string b) : void {
+    a << a & "a";
+    b << b & "b";
+
+    ("[i] fun22: Stampo i valori di a e b") -->!;
+    ("a: ", a) -->!;
+    ("b: ", b) -->!;
+}
