@@ -1,0 +1,3 @@
+while a < 3 loop
+    a <-- 42
+end

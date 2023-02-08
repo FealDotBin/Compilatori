@@ -1,0 +1,5 @@
+if a < 3 then
+    a <-- 42
+else
+    a <-- 42
+end

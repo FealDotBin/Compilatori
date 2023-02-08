@@ -1,0 +1,29 @@
+if a < 1 then
+    if a < 2 then
+        while a < 3 loop
+            a <-- 42
+        end loop
+    else
+        a <-- 42
+    end if
+end if;
+
+while a < 10 loop
+    if a < 20 then
+        if a < 30 then
+            a <-- 42
+        end if
+    else
+        a <-- 42
+    end if
+end loop
+
+if a < 100 then
+    while a < 200 loop
+        if a < 300 then
+            a <-- 42
+        end if
+    end loop
+else
+    a <-- 42
+end if
