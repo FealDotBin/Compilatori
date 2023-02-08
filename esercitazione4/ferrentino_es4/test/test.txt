@@ -1,0 +1,63 @@
+|* scrivere un programma NewLang che
+   visualizzi un menu in cui un utente può scegliere l' operazione aritmetica da svolgere
+   richieda all'utente gli input (interi o double) necessari per svolgere l'operazione scelta
+   esegua l'operazione, restituisca il risultato e chieda se si vuol continuare
+   all'input 0 oppure 1 il programma conclude oppure mostra il menu iniziale, rispettivamente.
+   N.B. si utilizzino almeno due funzioni. In generale, si cerchi di utilizzare tutte le caratteristiche del linguaggio.
+|
+
+start:
+def mainFunction() : void
+{
+    integer continue << 1;
+    integer option << 0;
+
+    while continue loop {
+        ("Scegli l'operazione da eseguire:") -->;
+        ("1. Somma") -->!;
+        ("2. Sottrazione") -->!;
+        ("3. Prodotto") -->!;
+        ("4. Divisione") -->!;
+        ("5. Potenza") -->!;
+        option <--;
+        evaluateOption(option);
+
+        ("Vuoi continuare? si (1) no (0)") -->!;
+        continue <--;
+    }
+}
+
+def evaluateOption(integer option) : void
+{
+    real a << 0.0;
+    real b << 0.0;
+    real result << 0.0;
+
+    if (option < 1 and option > 5) then {
+        ("Seleziona una delle operazioni presenti nella lista") -->!;
+        return;
+    }
+
+    ("Inserisci il primo operando: ") -->!;
+    a <--;
+    ("Inserisci il secondo operando: ") -->!;
+    b <--;
+
+    if (option = 1) then {
+        result << a + b;
+    }
+    if (option = 2) then {
+        result << a - b;
+    }
+    if (option = 3) then {
+        result << a * b;
+    }
+    if (option = 4) then {
+        result << a / b;
+    }
+    if (option = 5) then {
+        result << a ^ b;
+    }
+
+    ("Risultato: " & result) -->!;
+}
